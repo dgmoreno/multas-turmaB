@@ -21,7 +21,7 @@ namespace Multas.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "A {0} é de preenchimento obrigatório")]
-        [RegularExpression("[A-ZÁÍÉÂ]*[a-záéíóúàèìòùâêîôûäëïöüãõç -]*", 
+        [RegularExpression("[A-ZÁÍÉÂ][a-záéíóúàèìòùâêîôûäëïöüãõç -]*", 
             ErrorMessage = "A {0} apenas pode conter letras e espaços em branco. Cada palavra começa em Maiúscula, deguida de minúscula")]
         public string Esquadra { get; set; }
 
