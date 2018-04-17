@@ -125,7 +125,7 @@ namespace Multas.Controllers
             if (uploadFotografia != null)
             {
                 //o ficheiro foi fornecido
-                //validar se o que foi fornecido é uma imagem ----> fazer em casa
+                //validar se o que foi fornecido é uma imagem   ----> fazer em casa
                 //formatar o tamanho da imagem
                 //criar o caminho completo até ao sítio onde o ficheiro
                 //será guardado
