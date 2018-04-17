@@ -158,10 +158,26 @@ namespace Multas.Controllers
                     // se tudo correr bem, redireciona para a pagina de Index
                     return RedirectToAction("Index");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("","Houve um erro com a criação do novo Agente...");
                     
+                    ///se existir uma classe chamada 'Erro.cs'
+                    ///iremos nela registar os dados do erro
+                    ///- criar um objeto desta classe
+                    ///- atribuir a esse objeto os dados do erro
+                    /// - nome do controller
+                    /// - nome do método
+                    /// - data + hora do erro
+                    /// - mensagem do erro (ex)
+                    /// - dados que se tentavam inserir
+                    /// - outros dados considerados relevantes
+                    ///- guardar o objeto
+                    ///
+                    ///- notificar um GESTO do sistema, por email,
+                    ///  ou por outro meio, da ocorrência do erro
+                    ///  e dos seus dados
+
                 }
             }
 
