@@ -113,7 +113,6 @@ namespace Multas.Controllers
             {
                 idNovoAgente = 1;
             }
-
             //guardar o ID do novo Agente
             agente.ID = idNovoAgente;
             //especificar (escolher) o nome do ficheiro
@@ -121,15 +120,23 @@ namespace Multas.Controllers
 
             //var. auxiliar
             string path = "";
+   
             //validar se a imagem foi fornecida
             if (uploadFotografia != null)
             {
+                if(uploadFotografia.FileName.EndsWith("jpg") || uploadFotografia.FileName.EndsWith("png"))
                 //o ficheiro foi fornecido
                 //validar se o que foi fornecido é uma imagem   ----> fazer em casa
                 //formatar o tamanho da imagem
                 //criar o caminho completo até ao sítio onde o ficheiro
                 //será guardado
-                path = Path.Combine(Server.MapPath("~/imagens/"),nomeImagem);
+                {
+                    path = Path.Combine(Server.MapPath("~/imagens/"), nomeImagem);
+                }
+                else
+                {
+                    ModelState.AddModelError("","Ficheiro não é uma imagem");
+                }
 
                 //guardar o nome do ficheiro
                 agente.Fotografia = nomeImagem;
