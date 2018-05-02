@@ -31,12 +31,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fotografia)
+            @*@Html.DisplayFor(modelItem => item.Fotografia)*@
+            <a href="~/imagens/@Model.Fotografia" target="_blank">
+                <img src="~/imagens/@Model.Fotografia" width="50" height="37" />
+            </a>
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Voltar aos Agentes", "Index")
 </p>

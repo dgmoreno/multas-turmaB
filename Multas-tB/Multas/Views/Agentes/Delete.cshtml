@@ -35,6 +35,7 @@
             @*@Html.DisplayFor(modelItem => item.Fotografia)*@
             <a href="~/imagens/@Model.Fotografia" target="_blank">
                 <img src="~/imagens/@Model.Fotografia" width="50" height="37" />
+            </a>
         </dd>
 
     </dl>
@@ -42,7 +43,6 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
             <input type="submit" value="Apagar" class="btn btn-danger" /> |
             @Html.ActionLink("Regressar ao Inicio", "Index")

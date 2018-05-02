@@ -133,11 +133,6 @@ namespace Multas.Controllers
                 {
                     path = Path.Combine(Server.MapPath("~/imagens/"), nomeImagem);
                 }
-                else
-                {
-                    ModelState.AddModelError("","Ficheiro não é uma imagem");
-                }
-
                 //guardar o nome do ficheiro
                 agente.Fotografia = nomeImagem;
             }
@@ -165,7 +160,7 @@ namespace Multas.Controllers
                     // se tudo correr bem, redireciona para a pagina de Index
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     ModelState.AddModelError("","Houve um erro com a criação do novo Agente...");
                     
@@ -228,18 +223,43 @@ namespace Multas.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Nome,Esquadra,Fotografia")] Agentes agentes)
+        public ActionResult Edit([Bind(Include = "ID,Nome,Esquadra,Fotografia")] Agentes agente, HttpPostedFileBase uploadFotografiaEdit)
         {
+            string nomeImagem = "Agente_" + agente.ID + ".jpg";
+
+            string path = "";
+
+            if (uploadFotografiaEdit!=null)
+            {
+                if (uploadFotografiaEdit.FileName.EndsWith("jpg") || uploadFotografiaEdit.FileName.EndsWith("png"))
+                {
+                    path = Path.Combine(Server.MapPath("~/imagens/"), nomeImagem);
+
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Ficheiro não é uma imagem");
+                }
+                //guardar o nome do ficheiro
+                agente.Fotografia = nomeImagem;
+            }
             if (ModelState.IsValid)
             {
                 // neste caso já existe um Agente
                 // apenas quero EDITAR os seus dados
-                db.Entry(agentes).State = EntityState.Modified;
+                db.Entry(agente).State = EntityState.Modified;
                 //efetuar 'Commit'
                 db.SaveChanges();
+
+                if (uploadFotografiaEdit != null)
+                {
+                    //escrever o ficheiro com a fotografia no disco rígido na pasta
+                    uploadFotografiaEdit.SaveAs(path);
+                }
+
                 return RedirectToAction("Index");
             }
-            return View(agentes);
+            return View(agente);
         }
 
         // GET: Agentes/Delete/5
